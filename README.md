@@ -1,8 +1,45 @@
-# React + Vite
+# Event-in
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikasi manajemen event sederhana dengan fitur CRUD.
 
-Currently, two official plugins are available:
+## Instalasi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone repository ini:
+
+   ```bash
+   git clone https://github.com/username/event-in.git
+   cd event-in
+   ```
+
+2. Install dependensi:
+
+   ```bash
+   npm install
+   ```
+
+3. Konfigurasi database:
+
+   - Buat database MySQL baru
+   - Import file `database.sql` ke database yang telah dibuat
+   - Sesuaikan konfigurasi database di `api/config.php`
+
+4. Jalankan aplikasi:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Buka browser dan akses:
+
+   ```plaintext
+   http://localhost:5173
+   ```
+
+## Teknologi yang Digunakan
+
+- Vite
+- React.js
+- Tailwind CSS
+- Shadcn UI
+- PHP
+- MySQL
