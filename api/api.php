@@ -140,6 +140,27 @@ switch ($method) {
         break;
 
     case 'DELETE':
+        if (!$id) {
+            http_response_code(400);
+            echo json_encode(['message' => 'ID tidak ditemukan']);
+            break;
+        }
+
+        try {
+            $stmt = $conn->prepare("DELETE FROM events WHERE id = ?");
+            $stmt->execute([$id]);
+
+            if ($stmt->rowCount()) {
+                echo json_encode(['message' => 'Event berhasil dihapus']);
+            } else {
+                http_response_code(404);
+                echo json_encode(['message' => 'Event tidak ditemukan']);
+            }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode(['message' => 'Error menghapus event: ' . $e->getMessage()]);
+        }
+        break;
 
 
     default:
