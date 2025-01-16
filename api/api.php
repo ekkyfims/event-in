@@ -57,6 +57,42 @@ switch ($method) {
         break;
 
     case 'POST':
+        $data = json_decode(file_get_contents("php://input"));
+
+        if (!$data->nama_event || !$data->deskripsi || !$data->tanggal || !$data->waktu_mulai || !$data->waktu_selesai) {
+            http_response_code(400);
+            echo json_encode(['message' => 'Ada field yang belum diisi']);
+            break;
+        }
+
+        $sql = "INSERT INTO events (nama_event, deskripsi, tanggal, waktu_mulai, waktu_selesai, link_meet, berulang, created_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+
+        try {
+            $stmt = $conn->prepare($sql);
+            $berulang = isset($data->berulang) ? (bool)$data->berulang : false;
+            $stmt->execute([
+                $data->nama_event,
+                $data->deskripsi,
+                $data->tanggal,
+                $data->waktu_mulai,
+                $data->waktu_selesai,
+                $data->link_meet ?? null,
+                $berulang ? 1 : 0
+            ]);
+
+            $event_id = $conn->lastInsertId();
+
+            http_response_code(201);
+            echo json_encode([
+                'message' => 'Event berhasil dibuat',
+                'id' => $event_id
+            ]);
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode(['message' => 'Error membuat event: ' . $e->getMessage()]);
+        }
+        break;
 
 
     case 'PUT':
