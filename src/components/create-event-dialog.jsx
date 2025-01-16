@@ -86,7 +86,7 @@ export function CreateEventDialog({ open, onOpenChange, onCreateEvent }) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[425px] p-4 md:p-6">
         <DialogHeader>
           <DialogTitle className="text-xl">Buat Event Baru</DialogTitle>
           <DialogDescription>
